@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>伴宠时光 | 人宠咖啡空间</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="app">
+  <!-- Tab导航 -->
+  <nav class="tab-bar">
+    <div class="tab-item" data-page="home">首页</div>
+    <div class="tab-item" data-page="pet-goods">宠物用品</div>
+    <div class="tab-item" data-page="coffee">咖啡菜单</div>
+    <div class="tab-item" data-page="cart">购物车<span class="cart-badge hide">0</span></div>
+    <div class="tab-item" data-page="profile">我的</div>
+  </nav>
+
+  <!-- 首页 home -->
+  <div class="page home-page active">
+    <div class="banner">
+      <img src="https://p3-flow-image-sign.byteimg.com/tos-cn-i-a9rns2rl98/30114008103940389000022440101111~tplv-a9rns2rl98-image.image" alt="猫咪咖啡">
+      <div class="banner-text">
+        <h1>伴宠时光</h1>
+        <p>人宠友好 · 宠物咖啡空间<br>带上毛孩子，共享一段松弛温馨的咖啡时光</p>
+      </div>
+    </div>
+    <div class="card about-card">
+      <h3>关于我们</h3>
+      <p>伴宠时光是一家以人宠共生为核心的宠物咖啡空间。这里有舒适的人宠共享区域、精选宠物用品，以及主人专属的精品咖啡。主人安心小坐，毛孩子自在玩耍，双向治愈的温馨角落。</p>
+      <div class="tag-row">
+        <span class="tag">携宠友好</span>
+        <span class="tag">宠物专区</span>
+        <span class="tag">精品咖啡</span>
+        <span class="tag">安全分区</span>
+      </div>
+    </div>
+    <div class="func-grid">
+      <div class="func-item" data-goto="pet-goods">
+        <div class="func-icon">🐱</div>
+        <div class="func-name">宠物用品</div>
+        <div class="func-desc">精选好物</div>
+      </div>
+      <div class="func-item" data-goto="coffee">
+        <div class="func-icon">☕</div>
+        <div class="func-name">咖啡菜单</div>
+        <div class="func-desc">主人专属</div>
+      </div>
+      <div class="func-item" data-goto="cart">
+        <div class="func-icon">🛒</div>
+        <div class="func-name">购物车</div>
+        <div class="func-desc">查看商品</div>
+      </div>
+      <div class="func-item" data-goto="order-list">
+        <div class="func-icon">📋</div>
+        <div class="func-name">我的订单</div>
+        <div class="func-desc">查看记录</div>
+      </div>
+    </div>
+    <div class="card space-card">
+      <h3>毛孩子的乐园</h3>
+      <p>安全分区 · 通风明亮 · 专人看护</p>
+    </div>
+    <div class="section-title">热门推荐</div>
+    <div class="hot-list" id="hotList"></div>
+  </div>
+
+  <!-- 宠物用品页 -->
+  <div class="page pet-goods-page">
+    <div class="page-title">宠物用品</div>
+    <div class="goods-list" id="petGoodsList"></div>
+    <div class="float-cart" data-goto="cart">🛒<span class="float-badge hide">0</span></div>
+  </div>
+
+  <!-- 咖啡菜单页 -->
+  <div class="page coffee-page">
+    <div class="page-title">咖啡菜单</div>
+    <div class="coffee-list" id="coffeeList"></div>
+    <div class="float-cart" data-goto="cart">🛒<span class="float-badge hide">0</span></div>
+  </div>
+
+  <!-- 购物车页 -->
+  <div class="page cart-page">
+    <div class="page-title">购物车</div>
+    <div class="cart-empty hide" id="cartEmpty">购物车空空如也～</div>
+    <div class="cart-list" id="cartList"></div>
+    <div class="cart-bottom">
+      <div class="total">合计：¥<span id="totalPrice">0.00</span></div>
+      <button class="btn-submit" id="goCheck">去结算</button>
+    </div>
+  </div>
+
+  <!-- 订单确认页 -->
+  <div class="page check-page">
+    <div class="page-title">确认订单</div>
+    <div class="check-list" id="checkList"></div>
+    <div class="card remark-card">
+      <div class="remark-title">订单备注</div>
+      <textarea id="remarkInput" placeholder="填写备注，例如：少冰、宠物名字等，最多100字"></textarea>
+      <div class="quick-tag">
+        <span data-text="少冰">少冰</span>
+        <span data-text="多加奶泡">多加奶泡</span>
+        <span data-text="不要吸管">不要吸管</span>
+      </div>
+    </div>
+    <div class="tips-text">📢 本小程序为预约展示仅模拟付款，暂不支持线上付款功能。</div>
+    <div class="cart-bottom">
+      <div class="total">合计：¥<span id="checkTotal">0.00</span></div>
+      <button class="btn-submit" id="payBtn">模拟支付</button>
+    </div>
+  </div>
+
+  <!-- 订单列表页 -->
+  <div class="page order-list-page">
+    <div class="page-title">我的订单</div>
+    <div class="order-empty hide" id="orderEmpty">暂无订单</div>
+    <div class="order-list" id="orderList"></div>
+  </div>
+
+  <!-- 个人中心 -->
+  <div class="page profile-page">
+    <div class="profile-header">
+      <div class="avatar">👤</div>
+      <div class="name" id="userName">点击登录</div>
+    </div>
+    <div class="profile-card">
+      <div class="profile-item" data-goto="order-list">📋 我的订单</div>
+      <div class="profile-item">📍 店铺地址：广东省广州市白云区京溪街道沙太南路181号</div>
+    </div>
+    <button class="btn-logout hide" id="logoutBtn">退出登录</button>
+  </div>
+
+  <!-- 咖啡规格弹窗 -->
+  <div class="modal-mask hide" id="specMask">
+    <div class="modal-box">
+      <div class="modal-head">选择规格</div>
+      <div class="modal-body">
+        <div class="spec-row">
+          <div class="spec-label">温度</div>
+          <div class="spec-option-group temp-group">
+            <span class="spec-option active" data-val="热">热</span>
+            <span class="spec-option" data-val="冰">冰</span>
+          </div>
+        </div>
+        <div class="spec-row ice-row hide">
+          <div class="spec-label">冰量</div>
+          <div class="spec-option-group ice-group">
+            <span class="spec-option active" data-val="正常冰">正常冰</span>
+            <span class="spec-option" data-val="少冰">少冰</span>
+            <span class="spec-option" data-val="去冰">去冰</span>
+          </div>
+        </div>
+        <div class="spec-row">
+          <div class="spec-label">甜度</div>
+          <div class="spec-option-group sugar-group">
+            <span class="spec-option active" data-val="全糖">全糖</span>
+            <span class="spec-option" data-val="半糖">半糖</span>
+            <span class="spec-option" data-val="三分糖">三分糖</span>
+            <span class="spec-option" data-val="无糖">无糖</span>
+          </div>
+        </div>
+        <div class="spec-row">
+          <div class="spec-label">数量</div>
+          <div class="num-select">
+            <button class="num-minus">-</button>
+            <input type="number" id="buyNum" value="1" min="1">
+            <button class="num-plus">+</button>
+          </div>
+        </div>
+      </div>
+      <div class="modal-foot">
+        <button class="modal-cancel">取消</button>
+        <button class="modal-confirm">确认加入购物车</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast提示 -->
+  <div class="toast hide" id="toast"></div>
+</div>
+<script src="app.js"></script>
+</body>
+</html>
